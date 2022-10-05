@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="study_form_view" model="ir.ui.view">
+            <field name="name">study.form.view</field>
+            <field name="model">study</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <field class="oe_avatar" name="image" string="Image" widget="image"/>
+                        <div class="oe_title">
+                            <label for="name" string="Study Name" class="oe_edit_only"/>
+                            <h1><field name="name" placeholder="Name study..."/></h1>
+                        </div>
+                        <group>
+                            <group>
+<!--                                <field name="age"/>-->
+<!--                                <field name="gender"/>-->
+<!--                                <field name="dateBirth"/>-->
+<!--                                <field name="testField"/>-->
+                                <field name="assign" widget="many2one_tags"/>
+                                <field name="dateLine"/>
+                            </group>
+                            <group>
+<!--                                <field name="weight"/>-->
+<!--                                <field name="height"/>-->
+<!--                                <field name="note"/>-->
+                                <field name="status"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="description"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="study_tree_view" model="ir.ui.view">
+            <field name="name">study.tree.view</field>
+            <field name="model">study</field>
+            <field name="arch" type="xml">
+                <tree string="Study" default_order="create_date desc">
+
+<!--Tuan1-->
+<!--                    <field name="name"/>-->
+<!--                    <field name="testField"/>-->
+<!--                    <field name="age"/>-->
+<!--                    <field name="dateBirth"/>-->
+<!--                    <field name="weight"/>-->
+<!--                    <field name="height"/>-->
+<!--                    <field name="gender"/>-->
+<!--                    <field name="note"/>-->
+<!--                    <field name="image" widget="attachment_image"/>-->
+
+<!--Tuan2-->
+                    <field name="name"/>
+                    <field name="dateLine"/>
+                    <field name="assign"/>
+                    <field name="status"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+
+       <record id="action_study" model="ir.actions.act_window">
+            <field name="name">Study</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">study</field>
+            <!-- <field name="view_type">form</field> --> <!-- Odoo 13 has removed this field -->
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('study_tree_view')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('study_form_view')})]"/>
+        </record>
+
+        <menuitem id="menu_study"
+            name="Study"
+            action="action_study"
+            sequence="10"
+            groups="base.group_user"/>
+    </data>
+</odoo>
