@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="staff_form_view" model="ir.ui.view">
+            <field name="name">staff.form.view</field>
+            <field name="model">staff</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+<!--                            <field name="project_ids"/>-->
+                            <field name="age"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="staff_tree_view" model="ir.ui.view">
+            <field name="name">staff.tree.view</field>
+            <field name="model">staff</field>
+            <field name="arch" type="xml">
+                <tree string="Staff" default_order="create_date desc">
+                    <field name="name"/>
+<!--                    <field name="project_ids"/>-->
+                    <field name="age"/>
+<!--                    <field name="task_ids"/>-->
+                </tree>
+            </field>
+        </record>
+
+       <record id="action_staff" model="ir.actions.act_window">
+            <field name="name">Staff</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">staff</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('staff_tree_view')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('staff_form_view')})]"/>
+        </record>
+
+        <menuitem id="menu_staff"
+            name="Staff"
+            action="action_staff"
+            parent="menu_field"
+            sequence="10"
+            groups="base.group_user"
+        />
+    </data>
+</odoo>
