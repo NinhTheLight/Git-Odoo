@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Tuan 3b",
+    'name': "Tuan3b Task manager",
     'summary': "",
-    'description': "",
+    'description': "Use object staff (users)",
     'author': "",
     'website': "",
     'category': 'Uncategorized',
@@ -13,6 +13,7 @@
     'data': [
         'security/ir.model.access.csv',
         'views/root_menu.xml',
+        'views/project_views.xml',
         'views/task_views.xml',
         'views/staff_views.xml',
     ],

@@ -7,12 +7,10 @@ class Task(models.Model):
     _description = "Task model"
 
     name = fields.Char('Name Task', required=True)
-    dateLine = fields.Date('Date Line')
 
-    staff_id = fields.Many2one('staff', string="Manager")
-    staff_ids = fields.Many2many('staff', String='Staff')
+    project_id = fields.Many2one('project1', string='Project')
+    staff_id = fields.Many2one('staff', string='Staff')
 
-    # user_ids = fields.Many2many('res.users', string='User')
-    # task_ids = fields.Many2many('res.partner', string='Task')
+    # staff_ids = fields.One2many('staff', 'task_id', string='Staff')
 
-    # user_ids = fields.One2many('user', 'project_id', string="Attendees")
+

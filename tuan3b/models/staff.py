@@ -9,5 +9,6 @@ class Staff(models.Model):
     name = fields.Char('Name Staff', required=True)
     age = fields.Float('age')
 
-    task_ids = fields.Many2many('task', string="Task")
+    task_ids = fields.One2many('task', 'staff_id', string="Task")
+
 

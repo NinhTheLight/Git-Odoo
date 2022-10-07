@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+<!--        <record id="project_search_view" model="ir.ui.view">-->
+<!--            <field name="name">project.search</field>-->
+<!--            <field name="model">project1</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <search string="Project">-->
+<!--                    <field name="name"/>-->
+<!--                    <field name="staff_ids" string="Assign to"/>-->
+<!--                    <filter string="Status" name="status" domain="[('status','=','ToDo'), ('manager','=','Ninh')]"/>-->
+<!--                    <group expand="1" string="Group By">-->
+<!--                        <filter string="Manager" name="manager" context="{'group_by':'manager'}"/>-->
+<!--                        <filter string="Status" name="status" context="{'group_by':'status'}"/>-->
+<!--&lt;!&ndash;                        <filter string="MyTask" name="mytask" context="{'group_by':'staff_ids'}"/>&ndash;&gt;-->
+<!--                    </group>-->
+<!--                </search>-->
+<!--            </field>-->
+<!--        </record>-->
+
+        <record id="project_form_view" model="ir.ui.view">
+            <field name="name">project.form.view</field>
+            <field name="model">project1</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" string="Name" class="oe_edit_only"/>
+                            <h1><field name="name" placeholder="Name..."/></h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="manager"/>
+<!--                                <field name="task_ids"/>-->
+                            </group>
+                            <group>
+                                <field name="dateLine"/>
+                                <field name="status"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="page_list_task" string="Page Task">
+                                <group>
+                                    <field name="task_ids">
+                                        <tree string="Tree String">
+                                            <field name="name"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="project_tree_view" model="ir.ui.view">
+            <field name="name">project.tree.view</field>
+            <field name="model">project1</field>
+            <field name="arch" type="xml">
+                <tree string="Project" default_order="create_date desc">
+                    <field name="name"/>
+                    <field name="dateLine"/>
+                    <field name="manager"/>
+                    <field name="task_ids" string="Tasks"/>
+                    <field name="status"/>
+                </tree>
+            </field>
+        </record>
+
+       <record id="action_project" model="ir.actions.act_window">
+            <field name="name">Project</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">project1</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('project_tree_view')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('project_form_view')})]"/>
+        </record>
+
+        <menuitem id="menu_project"
+            name="Project"
+            action="action_project"
+            parent="menu_field"
+            sequence="1"
+            groups="base.group_user"/>
+    </data>
+</odoo>

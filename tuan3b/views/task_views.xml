@@ -13,11 +13,8 @@
                         </div>
                         <group>
                             <group>
-                                <field name="staff_id"/>
-                                <field name="staff_ids"/>
-                            </group>
-                            <group>
-                                <field name="dateLine"/>
+                                <field name="project_id"/>
+                                <field name="staff_id" string="Staff"/>
                             </group>
                         </group>
                     </sheet>
@@ -31,9 +28,8 @@
             <field name="arch" type="xml">
                 <tree string="Task" default_order="create_date desc">
                     <field name="name"/>
-                    <field name="dateLine"/>
-                    <field name="staff_id"/>
-                    <field name="staff_ids"/>
+                    <field name="project_id"/>
+                    <field name="staff_id" string="Staff"/>
                 </tree>
             </field>
         </record>
@@ -51,7 +47,7 @@
             name="Task"
             action="action_task"
             parent="menu_field"
-            sequence="10"
+            sequence="2"
             groups="base.group_user"/>
     </data>
 </odoo>
