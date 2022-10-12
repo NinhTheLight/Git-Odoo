@@ -79,6 +79,7 @@
                         <field name="tags"/>
                         <field name="customer_id"/>
                         <field name="status"/>
+                        <field name="create_uid"/>
                 </tree>
             </field>
         </record>
