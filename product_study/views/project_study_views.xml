@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="project_study_search_view" model="ir.ui.view">
+            <field name="name">project.search</field>
+            <field name="model">project.study</field>
+            <field name="arch" type="xml">
+                <search string="Project Study">
+                    <field name="name"/>
+                    <field name="staff_id" string="Assign to"/>
+                    <filter string="My task" name="my_task" domain="[('staff_id','=', uid)]"/>
+                    <filter string="My create" name="my_create" domain="[('create_uid', '=', uid)]"/>
+                    <group expand="1" string="Group By">
+                        <filter string="Assign to" name="assign_to" context="{'group_by':'staff_id'}"/>
+                        <filter string="Status" name="status" context="{'group_by':'status'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record id="project_study_form_view" model="ir.ui.view">
+            <field name="name">project.form.view</field>
+            <field name="model">project.study</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1><field name="name" placeholder="Name..."/></h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="status"/>
+                                <field name="manager" widget="many2many_tags"/>
+                                <field name="staff_id"/>
+                                <field name="assigned_update_at"/>
+                                <field name="customer_id"/>
+                            </group>
+                            <group>
+                                <field name="start_date"/>
+                                <field name="end_date"/>
+                                <field name="dateline"/>
+                                <field name="tags"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="description"/>
+                        </group>
+<!--                        <notebook>-->
+<!--                            <page name="page_list_task" string="Page Task">-->
+<!--                                <group>-->
+<!--                                    <field name="task_ids">-->
+<!--                                        <tree string="Tree String">-->
+<!--                                            <field name="name"/>-->
+<!--                                            <field name="staff_id"/>-->
+<!--                                        </tree>-->
+<!--                                    </field>-->
+<!--                                </group>-->
+<!--                            </page>-->
+<!--                            -->
+<!--                        </notebook>-->
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="project_study_tree_view" model="ir.ui.view">
+            <field name="name">project.tree.view</field>
+            <field name="model">project.study</field>
+            <field name="arch" type="xml">
+                <tree string="Project Study" default_order="create_date desc">
+                    <field name="name"/>
+                    <field name="status"/>
+                        <field name="manager" widget="many2many_tags"/>
+                        <field name="staff_id"/>
+                        <field name="assigned_update_at"/>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                        <field name="dateline"/>
+                        <field name="tags"/>
+                        <field name="customer_id"/>
+                        <field name="status"/>
+                </tree>
+            </field>
+        </record>
+
+       <record id="action_project_study" model="ir.actions.act_window">
+            <field name="name">Project study</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">project.study</field>
+            <field name="domain">['|', ('staff_id','=',uid), ('create_uid', '=', uid)]</field>
+<!--            <field name="domain"></field>-->
+           <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('project_study_tree_view')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('project_study_form_view')})]"/>
+        </record>
+
+        <menuitem id="menu_project"
+            name="Enmasys Study Project"
+            action="action_project_study"
+            sequence="1"
+            groups="base.group_user"/>
+    </data>
+</odoo>
