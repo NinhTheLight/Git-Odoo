@@ -8,9 +8,6 @@ from odoo.exceptions import UserError, ValidationError
 class Project(models.Model):
     _name = "project.study"
     _description = "Project study model"
-    _inherit = ['mail.thread']
-    # _inherit = ['mail.thread', 'ir.need-action_mixin']
-    # _inherit = ['mail.thread', 'ir.need_action_mixin']
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
 
