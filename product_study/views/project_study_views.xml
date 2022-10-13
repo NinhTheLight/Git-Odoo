@@ -31,7 +31,7 @@
                             <group>
                                 <field name="status"/>
                                 <field name="manager" widget="many2many_tags"/>
-                                <field name="staff_id"/>
+                                <field name="staff_id" widget="many2many_tags"/>
                                 <field name="assigned_update_at"/>
                                 <field name="customer_id"/>
                             </group>
@@ -45,20 +45,11 @@
                         <group>
                             <field name="description"/>
                         </group>
-<!--                        <notebook>-->
-<!--                            <page name="page_list_task" string="Page Task">-->
-<!--                                <group>-->
-<!--                                    <field name="task_ids">-->
-<!--                                        <tree string="Tree String">-->
-<!--                                            <field name="name"/>-->
-<!--                                            <field name="staff_id"/>-->
-<!--                                        </tree>-->
-<!--                                    </field>-->
-<!--                                </group>-->
-<!--                            </page>-->
-<!--                            -->
-<!--                        </notebook>-->
                     </sheet>
+                   <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
                 </form>
             </field>
         </record>
@@ -88,8 +79,9 @@
             <field name="name">Project study</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">project.study</field>
-            <field name="domain">['|', ('staff_id','=',uid), ('create_uid', '=', uid)]</field>
-<!--            <field name="domain"></field>-->
+<!--           Domain nay Chi khoa lai tren views: -->
+<!--            <field name="domain">['|', ('staff_id','=',uid), ('create_uid', '=', uid)]</field>-->
+            <field name="domain"></field>
            <field name="view_ids" eval="[(5, 0, 0),
                 (0, 0, {'view_mode': 'tree', 'view_id': ref('project_study_tree_view')}),
                 (0, 0, {'view_mode': 'form', 'view_id': ref('project_study_form_view')})]"/>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.module.category" id="module_project_study">
+            <field name="name">Project Study</field>
+            <field name="description">...</field>
+            <field name="sequence">18</field>
+        </record>
+
+        <record id="study_group_user" model="res.groups">
+            <field name="name">User</field>
+            <field name="category_id" ref="product_study.module_project_study"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+<!--            kế thừa group_user của module product_study, k phải của addons. có trong ir.model.access.csv line 2-->
+        </record>
+
+        <record id="study_group_manager" model="res.groups">
+            <field name="name">Manager</field>
+            <field name="category_id" ref="product_study.module_project_study"/>
+            <field name="implied_ids" eval="[(4, ref('study_group_user'))]"/>
+        </record>
+    </data>
+</odoo>
